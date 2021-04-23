@@ -1,15 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<img alt="Vue logo" src="./assets/logo.png">
+  <Navbar :idMenu="idMenu" :key="idMenu" />  
+  <router-view @id-menu="setMenu($event)" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from '@/components/Navbar'
+import { ref } from 'vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar    
+  },
+  setup(){
+    const idMenu = ref(1);
+
+    function setMenu(id)
+    {
+      idMenu.value = id;
+    }
+
+    return {
+      setMenu,
+      idMenu,
+    }
   }
 }
 </script>
@@ -21,6 +36,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
